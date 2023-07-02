@@ -1,0 +1,32 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "buid": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vantuan25072001/fokify.git"
+  },
+  "author": "vantuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vantuan25072001/fokify/issues"
+  },
+  "homepage": "https://github.com/vantuan25072001/fokify#readme",
+  "dependencies": {
+    "core-js": "^3.31.0",
+    "fractional": "^1.0.0",
+    "parcel": "^2.9.3"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "events": "^3.3.0",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0",
+    "util": "^0.12.5"
+  }
+}
