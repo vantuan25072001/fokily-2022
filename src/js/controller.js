@@ -20,6 +20,8 @@ const controlRecipes = async function () {
     if (!id) return;
 
     recipeView.renderSpiner();
+    // 0)  Đấu dấu kết quả tìm kiếm đã chọn
+    resultsView.update(model.getSearchResultsPage());
 
     // 1) Loading recipe
     await model.loadRecipe(id);
@@ -37,27 +39,42 @@ const controlSearchResults = async function () {
     // 1) Get search query
     const query = searchView.getQuery();
     if (!query) return;
-  
+
     // 2) Load search resuhlts
     await model.loadSearchResults(query);
     // 3) Render results
     resultsView.render(model.getSearchResultsPage());
-  // 4) Render initial pagination buttons
+    // 4) Render initial pagination buttons
     paginationView.render(model.state.search);
-
   } catch (err) {
     console.log(err);
   }
 };
 
-const controlPagination = function(gotoPage){
-      // 1) Render  NEW results
-      resultsView.render(model.getSearchResultsPage(gotoPage));
-      // 2) Render NEW initial pagination buttons
-       paginationView.render(model.state.search);
-}
+const controlPagination = function (gotoPage) {
+  // 1) Render  NEW results
+  resultsView.render(model.getSearchResultsPage(gotoPage));
+  // 2) Render NEW initial pagination buttons
+  paginationView.render(model.state.search);
+};
+
+const controlServings = function (newServings) {
+  //1) Cập nhật khẩu phần ăn mới (số khẩu phần ăn mới)
+  model.updateServings(newServings);
+  //2) Cập nhật trên view
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = function () {
+  model.addBookmark(model.state.recipe);
+  console.log(model.state.recipe);
+  recipeView.update(model.state.recipe);
+};
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerRender(controlSearchResults);
   paginationView.addHandlerRender(controlPagination);
 };
